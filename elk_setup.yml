@@ -1,0 +1,12 @@
+---
+
+- hosts: elk_stack
+  connection: local
+  remote_user: root
+  become: true
+  roles:
+    - role: java8
+    - role: elastic_stack
+    - role: logstash
+    - role: elasticsearch
+    - role: kibana

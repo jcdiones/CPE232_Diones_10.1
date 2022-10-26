@@ -1,0 +1,19 @@
+---
+
+
+- hosts: filebeat
+  connection: local
+  remote_user: root
+  become: true
+  roles:
+    - role: filebeat
+  tasks:
+	
+    - name: Load Filebeat template
+      uri:
+        url: http://localhost:9200/_template/filebeat-6.3.1
+	method: PUT
+	headers:
+	  Content-Type: "application/json"
+	body: "{{ lookup('file','/tmp/filebeat.template.json') }}"
+        body_format: json
